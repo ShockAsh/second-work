@@ -1,0 +1,26 @@
+@RestController
+@RequestMapping("/calculator")
+public class CalculatorController {
+    @Autowired
+    private CalculatorService calculatorService;
+
+    @Autowired
+    private CalculationHistoryService historyService;
+
+    @PostMapping("/calculate")
+    public ResponseEntity<CalculationResult> calculate(@RequestBody String expression) {
+        try {
+            Double result = calculatorService.calculate(expression);
+            historyService.saveCalculation(expression, result);
+            return ResponseEntity.ok(new CalculationResult(result));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new CalculationResult(e.getMessage()));
+        }
+    }
+
+    @GetMapping("/history")
+    public ResponseEntity<List<CalculationHistory>> getHistory() {
+        List<CalculationHistory> history = historyService.getCalculationHistory();
+        return ResponseEntity.ok(history);
+    }
+}
