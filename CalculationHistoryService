@@ -1,0 +1,14 @@
+@Service
+public class CalculationHistoryService {
+    @Autowired
+    private CalculationHistoryRepository historyRepository;
+
+    public void saveCalculation(String expression, double result) {
+        CalculationHistory history = new CalculationHistory(expression, result);
+        historyRepository.save(history);
+    }
+
+    public List<CalculationHistory> getCalculationHistory() {
+        return historyRepository.findTop10ByOrderByTimestampDesc();
+    }
+}
