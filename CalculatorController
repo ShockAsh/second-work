@@ -1,0 +1,32 @@
+@Controller
+public class CalculatorController {
+    @Autowired
+    private CalculatorService calculatorService;
+
+    @Autowired
+    private CalculationHistoryService historyService;
+
+    @GetMapping("/")
+    public String index() {
+        return "index";
+    }
+
+    @PostMapping("/calculate")
+    public String calculate(@RequestParam String expression, Model model) {
+        try {
+            double result = calculatorService.calculate(expression);
+            historyService.saveCalculation(expression, result);
+            model.addAttribute("result", result);
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+        }
+        return "index";
+    }
+
+    @GetMapping("/history")
+    public String history(Model model) {
+        List<CalculationHistory> history = historyService.getCalculationHistory();
+        model.addAttribute("history", history);
+        return "history";
+    }
+}
