@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Include necessary CSS/JavaScript libraries -->
+</head>
+<body>
+    <h1>Calculation History</h1>
+    <ul>
+        <li th:each="entry : ${history}">
+            <span th:text="${entry.expression} + ' = ' + entry.result"></span>
+        </li>
+    </ul>
+    <a href="/">Back to Calculator</a>
+</body>
+</html>
