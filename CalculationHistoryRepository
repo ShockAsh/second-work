@@ -1,0 +1,4 @@
+@Repository
+public interface CalculationHistoryRepository extends JpaRepository<CalculationHistory, Long> {
+    List<CalculationHistory> findTop10ByOrderByTimestampDesc();
+}
