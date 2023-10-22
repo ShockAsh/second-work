@@ -1,0 +1,17 @@
+@Entity
+public class CalculationHistory {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String expression;
+    private Double result;
+    private Timestamp timestamp;
+
+    public CalculationHistory(String expression, Double result) {
+        this.expression = expression;
+        this.result = result;
+        this.timestamp = new Timestamp(System.currentTimeMillis());
+    }
+    
+    // Getter and Setter methods
+}
