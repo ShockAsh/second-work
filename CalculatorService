@@ -1,0 +1,9 @@
+@Service
+public class CalculatorService {
+    public Double calculate(String expression) throws Exception {
+        // Implement the calculation logic here
+        // Use a math expression parser library for complex calculations
+        // Handle scientific calculator functions and order of operations
+        return 0.0;  // Replace with actual calculation result
+    }
+}
